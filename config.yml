@@ -1,0 +1,7 @@
+development:
+  password: shptka_18b0cc7bc2b4e76c218774cd8d6ba6c9
+  theme_id: "150491037994"
+  store: andrewbaklytsky.myshopify.com
+  ignore_files:
+#    - config/settings_data.json
+#    - templates/*.json
