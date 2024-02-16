@@ -69,14 +69,6 @@
           >
         {%- endif -%}
 
-        {%- if product.tags contains 'GWP_PARENT' -%}
-          <input
-                  type="hidden"
-                  name="properties[_gwp]"
-                  value="parent"
-          >
-        {%- endif -%}
-
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}

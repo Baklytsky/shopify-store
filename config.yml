@@ -5,3 +5,13 @@ development:
   ignore_files:
 #    - config/settings_data.json
 #    - templates/*.json
+
+
+
+#development:
+#  password: shptka_b12d28e86915fe08adb1a5a165401d88
+#  theme_id: "163725181211"
+#  store: andrewbaklytsky2.myshopify.com
+#  ignore_files:
+#    - config/settings_data.json
+#    - templates/*.json
