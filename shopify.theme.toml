@@ -1,0 +1,5 @@
+[environments.dev]
+theme = "166491881770"
+store = "andrewbaklytsky.myshopify.com"
+password  = "shptka_18b0cc7bc2b4e76c218774cd8d6ba6c9"
+#ignore = "sections/header.liquid"

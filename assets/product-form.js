@@ -60,9 +60,6 @@ if (!customElements.get('product-form')) {
               soldOutMessage.classList.remove('hidden');
               this.error = true;
               return;
-            } else if (!this.cart) {
-              window.location = window.routes.cart_url;
-              return;
             }
 
             if (!this.error)
@@ -78,14 +75,16 @@ if (!customElements.get('product-form')) {
                 'modalClosed',
                 () => {
                   setTimeout(() => {
-                    this.cart.renderContents(response);
+                    if (this.cart) this.cart.renderContents(response);
+                    window.dispatchEvent(new CustomEvent("updateCart"));
                   });
                 },
                 { once: true }
               );
               quickAddModal.hide(true);
             } else {
-              this.cart.renderContents(response);
+              if (this.cart) this.cart.renderContents(response);
+              window.dispatchEvent(new CustomEvent("updateCart"));
             }
           })
           .catch((e) => {
