@@ -9,6 +9,8 @@
     "dev": "concurrently --raw --kill-others --passthrough-arguments \"npm run shopify:dev\" \"npm run vite:dev\"",
     "shopify:dev": "shopify theme dev -e dev",
     "vite:dev": "vite",
+    "pull:settings": "shopify theme pull --only='config/*.json'  --only='sections/*.json'  --only='templates/*.json'",
+    "pull:updates": "shopify theme pull",
     "deploy": "npm run build && npm run shopify:push",
     "shopify:push": "shopify theme push -e dev",
     "build": "vite build",

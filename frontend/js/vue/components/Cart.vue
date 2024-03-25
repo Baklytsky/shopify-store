@@ -1,17 +1,15 @@
 <template v-if="cartReady">
   <div v-if="cartHasItems" :class="[
-      'drawer',
+      'drawer animate',
       {
-        'animate active': cartOpen,
+        'active': cartOpen,
       }]">
     <div id="CartDrawer" class="cart-drawer">
       <div id="CartDrawer-Overlay" class="cart-drawer__overlay" @click="toggleCart()"></div>
       <div class="drawer__inner gradient color-scheme-1">
         <CartHeader :toggleCart="toggleCart"/>
-
-        <div class="">
-          <LineItems :cart="cart"/>
-        </div>
+        <LineItems :cart="cart"/>
+        <CartFooter :cartIsEmpty="cartIsEmpty"/>
       </div>
     </div>
   </div>
@@ -24,6 +22,7 @@
 import {computed, onMounted, ref} from "vue";
 import LineItems from "@/js/vue/components/LineItems.vue";
 import CartHeader from "@/js/vue/components/CartHeader.vue";
+import CartFooter from "@/js/vue/components/CartFooter.vue";
 
 const cart = ref({});
 const cartOpen = ref(false);
