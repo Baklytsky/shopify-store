@@ -1,0 +1,21 @@
+<div data-vue-root="Cart">
+  <cart />
+</div>
+
+<script type="application/json" data-settings>
+  {{ section.settings | json }}
+</script>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cart_title",
+      "label": "Title",
+      "default": "Your cart"
+    }
+  ]
+}
+{% endschema %}

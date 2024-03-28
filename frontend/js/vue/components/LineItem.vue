@@ -51,9 +51,8 @@
           ${{ (Number(lineItem.final_price) / 100).toFixed(2) }}
         </span>
       </div>
-
       <span v-else class="price price--end">
-        ${{ (Number(lineItem.original_price) / 100).toFixed(2) }}
+        ${{ (Number((lineItem.original_price) / 100) * lineItem.quantity).toFixed(2) }}
       </span>
     </div>
   </td>
@@ -65,7 +64,10 @@
       <div class="cart-item__quantity-wrapper quantity-popover-wrapper">
         <div class="quantity-popover-container{% if has_qty_rules or has_vol_pricing %} quantity-popover-container--hover{% endif %}">
           <div class="quantity cart-quantity">
-            <button class="quantity__button no-js-hidden" name="minus" type="button">
+            <button class="quantity__button no-js-hidden"
+                    name="minus"
+                    type="button"
+                    @click="updateQuantity(lineItem.quantity - 1)">
               -
             </button>
             <input
@@ -73,23 +75,24 @@
                 type="number"
                 name="updates[]"
                 :value="lineItem.quantity"
-                :min="lineItem.quantity_rule.min"
-                :max="lineItem.quantity_rule.max ? lineItem.quantity_rule.max : ''"
-                :step="lineItem.quantity_rule.increment"
-                :aria-label="lineItem.title"
-                :data-key="lineItem.key"
-            >
-            <button class="quantity__button no-js-hidden" name="plus" type="button">
+                :min="lineItem.quantity_rule?.min ? lineItem.quantity_rule.min : ''"
+                :max="lineItem.quantity_rule?.max ? lineItem.quantity_rule.max : ''"
+                :step="lineItem.quantity_rule?.increment"
+                :aria-label="lineItem.title">
+            <button class="quantity__button no-js-hidden"
+                    name="plus"
+                    type="button"
+                    @click="updateQuantity(lineItem.quantity + 1)">
               +
             </button>
           </div>
         </div>
 
-        <div :data-key="lineItem.key">
+        <div>
           <button
               type="button"
               class="button button--tertiary cart-remove-button"
-              :aria-label="lineItem.key.title">
+              :aria-label="lineItem.key.title" @click="updateQuantity(0)">
             Remove
           </button>
         </div>
@@ -98,8 +101,8 @@
 </template>
 
 <script setup>
-
-defineProps({
+import { useCartStore } from "@/js/vue/Stores/cartStore.js";
+const props = defineProps({
       lineItem: {
         type: Object,
         default: () => {
@@ -107,5 +110,14 @@ defineProps({
       }
     }
 )
+const cartStore = useCartStore()
+const updateQuantity = (qty) => {
+  const data = {
+    id: props.lineItem.key.toString(),
+    quantity: qty
+  };
+  console.log(data)
+  cartStore.updateItem(data).then(() => window.dispatchEvent(new CustomEvent("updateCart")))
+};
 
 </script>

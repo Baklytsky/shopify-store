@@ -17,11 +17,6 @@
   }
 </style>
 
-<div data-vue-root="Cart">
-  <cart />
-</div>
-
-{%- comment -%}
   <cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
     <div id="CartDrawer" class="cart-drawer">
       <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
@@ -534,7 +529,6 @@
       </div>
     </div>
   </cart-drawer>
-{%- endcomment -%}
 
 
 <script>
